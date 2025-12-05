@@ -1,0 +1,287 @@
+@font-face {
+    font-family: "QueenRogette";
+    src: url("resource/queen-rogette.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Futura', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+
+
+.hero-section {
+    background: #c13000;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+
+
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px 60px;
+    position: relative;
+    z-index: 10;
+}
+
+.logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-container img {
+    height: 120px;
+    width: auto;
+}
+
+.brand-name {
+    color: white;
+    font-size: 60px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-family: "QueenRogette", serif;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.auth-buttons button {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Futura', sans-serif;
+}
+
+.sign-in-btn {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.sign-in-btn:hover {
+    background: white;
+    color: #FF5252;
+}
+
+.sign-up-btn {
+    background: white;
+    color: #FF5252;
+}
+
+.sign-up-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+
+
+.hero-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.main-heading {
+    color: white;
+    font-size: 56px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    letter-spacing: 0.5px;
+    font-family: 'Futura', sans-serif;
+}
+
+
+
+.input-container {
+    background: white;
+    border-radius: 50px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.location-icon {
+    color: #666;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.email-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    padding: 12px 0;
+    color: #333;
+    min-width: 0;
+}
+
+.email-input::placeholder {
+    color: #999;
+}
+
+.get-started-btn {
+    background: #FF5252;
+    color: white;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.get-started-btn:hover {
+    background: #f81313;
+    transform: scale(1.05);
+}
+
+
+.error {
+    border: 2px solid red !important;
+}
+
+.error-message {
+    color: white;
+    font-size: 14px;
+    margin-top: 4px;
+    display: none;
+}
+
+
+
+@media (max-width: 1024px) {
+    .logo-container img { height: 100px; }
+    .brand-name { font-size: 50px; }
+    .main-heading { font-size: 44px; }
+    .navbar { padding: 15px 40px; }
+}
+
+
+@media (max-width: 768px) {
+
+    .navbar {
+        padding: 15px 20px;
+        justify-content: space-between;
+    }
+
+    .logo-container {
+        position: static;
+        transform: none;
+        flex-direction: row;
+        gap: 10px;
+        margin-bottom: 0;
+    }
+
+    .logo-container img { height: 70px; }
+    .brand-name { font-size: 40px; }
+    .main-heading { font-size: 32px; }
+
+    .input-container {
+        width: 95%;
+        padding: 10px 12px;
+    }
+
+    .email-input {
+        font-size: 16px;
+        padding: 10px 4px;
+    }
+
+    .get-started-btn {
+        padding: 12px 24px;
+        font-size: 15px;
+        white-space: nowrap;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .logo-container img { height: 50px; }
+    .brand-name { font-size: 28px; }
+    
+    .main-heading { 
+        font-size: 32px;
+        margin-bottom: 30px;
+        padding: 0 15px;
+        line-height: 1.2;
+    }
+
+    .hero-content {
+        padding: 20px 15px;
+    }
+
+    .input-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding: 16px;
+        max-width: 85%;
+        margin: 0 auto;
+        border-radius: 25px;
+    }
+
+    .location-icon {
+        align-self: flex-start;
+        font-size: 18px;
+        margin-left: 4px;
+    }
+
+    .email-input {
+        width: 100%;
+        padding: 10px 8px;
+        font-size: 15px;
+    }
+
+    .get-started-btn {
+        width: 100%;
+        padding: 12px 20px;
+        justify-content: center;
+        font-size: 14px;
+    }
+
+    .error-message {
+        font-size: 12px;
+        margin-top: 8px;
+    }
+}

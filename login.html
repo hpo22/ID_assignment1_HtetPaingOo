@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local - Log In</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <!-- Logo and Brand -->
+            <div class="brand-section">
+                <h1 class="brand-name">Local</h1>
+                <p class="subtitle">Log into your acc</p>
+            </div>
+
+            <!-- Login Form -->
+            <form class="login-form" id="loginForm">
+                <div class="input-group">
+                    <input 
+                        type="email" 
+                        id="email" 
+                        placeholder="Email"
+                        required
+                    >
+                </div>
+
+                <div class="input-group password-group">
+                    <input 
+                        type="password" 
+                        id="password" 
+                        placeholder="Enter Password"
+                        required
+                    >
+                    <button type="button" class="toggle-password" id="togglePassword">
+                        <svg class="eye-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </button>
+                </div>
+
+                <button type="submit" class="login-btn">Log in</button>
+
+                <p id="errorMsg" class="error-message">Wrong email or password</p>
+
+                <a href="#" class="forgot-password">Forgot password?</a>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Toggle password visibility
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+        });
+
+        // Handle form submission
+        const loginForm = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const errorMsg = document.getElementById('errorMsg');
+
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = emailInput.value;
+            const password = passwordInput.value;
+
+            // Get stored credentials from localStorage
+            const storedEmail = localStorage.getItem('userEmail');
+            const storedPassword = localStorage.getItem('userPassword');
+
+            // Validate credentials
+            if (email === storedEmail && password === storedPassword) {
+                // Hide error message if shown
+                errorMsg.style.display = 'none';
+                emailInput.classList.remove('error');
+                passwordInput.classList.remove('error');
+                
+                // Redirect to homepage
+                window.location.href = 'index.html';
+            } else {
+                // Show error message
+                errorMsg.style.display = 'block';
+                emailInput.classList.add('error');
+                passwordInput.classList.add('error');
+            }
+        });
+
+        // Clear error on input
+        emailInput.addEventListener('input', function() {
+            errorMsg.style.display = 'none';
+            emailInput.classList.remove('error');
+            passwordInput.classList.remove('error');
+        });
+
+        passwordInput.addEventListener('input', function() {
+            errorMsg.style.display = 'none';
+            emailInput.classList.remove('error');
+            passwordInput.classList.remove('error');
+        });
+    </script>
+</body>
+</html>

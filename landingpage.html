@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local - Food Delivery</title>
+    <link rel="stylesheet" href="landingpage.css">
+
+</head>
+<body>
+    <div class="hero-section">
+        <nav class="navbar">
+            <div class="logo-container">
+                <img src="resource/logo1.png" alt="Local Logo">
+                <span class="brand-name">Local</span>
+            </div>
+            <div class="auth-buttons">
+                <button class="sign-in-btn" onclick="window.location.href='login.html'">Sign In</button>
+                <button class="sign-up-btn" onclick="window.location.href='signup.html'">Sign Up</button>
+            </div>
+        </nav>
+
+        <div class="hero-content">
+            <h1 class="main-heading">50% OFF FOR FIRST ORDER</h1>
+            
+            <div class="input-container">
+                <span class="location-icon">📧</span>
+                <input 
+                    type="email" 
+                    id="emailInput"
+                    class="email-input" 
+                    placeholder="Enter your email address"
+                >
+                <button class="get-started-btn" id="startBtn">
+                    Get Started
+                    <span class="arrow">→</span>
+                </button>
+            </div>
+
+            <!-- Validation Message -->
+            <p id="errorMsg" class="error-message">Please enter a valid email address.</p>
+
+        </div>
+    </div>
+
+    <script>
+        const emailInput = document.getElementById('emailInput');
+        const startBtn = document.getElementById('startBtn');
+        const errorMsg = document.getElementById('errorMsg');
+
+        // Email validation regex
+        function isValidEmail(email) {
+            return email.includes("@") && email.includes(".");
+        }
+
+        function proceed() {
+            const email = emailInput.value.trim();
+
+           
+            if (!isValidEmail(email)) {
+                emailInput.classList.add("error");
+                errorMsg.style.display = "block";
+                return;
+            }
+            
+            emailInput.classList.remove("error");
+            errorMsg.style.display = "none";
+            localStorage.setItem("userEmail", email);
+            window.location.href = "index.html";
+        }
+
+        
+        startBtn.addEventListener("click", proceed);
+
+        
+        emailInput.addEventListener("keydown", function(e) {
+            if (e.key === "Enter") {
+                proceed();
+            }
+        });
+
+        emailInput.addEventListener("input", function() {
+            emailInput.classList.remove("error");
+            errorMsg.style.display = "none";
+        });
+    </script>
+
+</body>
+</html>

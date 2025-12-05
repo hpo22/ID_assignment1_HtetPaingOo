@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local - Sign Up</title>
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <!-- Logo and Brand -->
+            <div class="brand-section">
+                <h1 class="brand-name">Local</h1>
+                <p class="subtitle">Create account</p>
+            </div>
+
+            <!-- Signup Form -->
+            <form class="login-form" id="signupForm">
+                <div class="input-group">
+                    <input 
+                        type="email" 
+                        id="email" 
+                        placeholder="Email"
+                        required
+                    >
+                </div>
+
+                <div class="input-group password-group">
+                    <input 
+                        type="password" 
+                        id="password" 
+                        placeholder="Enter Password"
+                        required
+                    >
+                    <button type="button" class="toggle-password" id="togglePassword">
+                        <svg class="eye-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </button>
+                </div>
+
+                <button type="submit" class="login-btn">Sign Up</button>
+
+                <a href="login.html" class="forgot-password">Already have an account? Log in</a>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Toggle password visibility
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+        });
+
+        // Handle form submission
+        const signupForm = document.getElementById('signupForm');
+        signupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Validate email and password
+            if (email && password) {
+                // Store user credentials in localStorage
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('userPassword', password);
+                
+                // Show success message
+                alert('Account created successfully!');
+                
+                // Redirect to login page
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</body>
+</html>
