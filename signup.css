@@ -56,7 +56,7 @@ body {
     font-weight: 500;
 }
 
-/* Form Styles */
+
 .login-form {
     display: flex;
     flex-direction: column;
@@ -89,7 +89,7 @@ body {
     box-shadow: 0 0 0 3px rgba(193, 48, 0, 0.1);
 }
 
-/* Password Group with Eye Icon */
+
 .password-group {
     position: relative;
 }
@@ -145,7 +145,7 @@ body {
     transform: translateY(0);
 }
 
-/* Forgot Password Link */
+
 .forgot-password {
     text-align: center;
     color: #c13000;
@@ -161,7 +161,7 @@ body {
     text-decoration: underline;
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
     .login-box {
         padding: 40px 30px;

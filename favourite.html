@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favourites - Local</title>
+    <link rel="stylesheet" href="favourite.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="back-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            <span>back</span>
+        </a>
+    </header>
+
+    
+    <div class="favourites-container" id="favouritesContainer">
+        
+    </div>
+
+    <script>
+        // Load and display favourite items
+        function loadFavourites() {
+            const favourites = JSON.parse(localStorage.getItem('favourites')) || [];
+            const container = document.getElementById('favouritesContainer');
+            
+            if (favourites.length === 0) {
+                container.innerHTML = '<p class="empty-message">No favourite items yet. Start adding items by clicking the heart icon!</p>';
+                return;
+            }
+            
+            container.innerHTML = '';
+            
+            favourites.forEach((item, index) => {
+                const itemCard = document.createElement('div');
+                itemCard.className = 'favourite-item';
+                itemCard.innerHTML = `
+                    <div class="item-image">
+                        <img src="${item.image}" alt="${item.name}">
+                    </div>
+                    <div class="item-details">
+                        <h3 class="item-name">${item.name}</h3>
+                        <div class="item-rating">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#FFD700" stroke="none">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                            <span class="rating-text">${item.rating} (${item.reviews})</span>
+                        </div>
+                        <div class="item-info">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span class="item-time">Est:${item.time}</span>
+                            <span class="item-price">${item.price}</span>
+                        </div>
+                    </div>
+                    <button class="heart-btn active" onclick="event.stopPropagation(); removeFavourite(${index})">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="#c13000" stroke="#c13000" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </button>
+                `;
+                itemCard.onclick = function() {
+                    window.location.href = `product.html?name=${encodeURIComponent(item.name)}&image=${encodeURIComponent(item.image)}&rating=${encodeURIComponent(item.rating)}&reviews=${encodeURIComponent(item.reviews)}&time=${encodeURIComponent(item.time)}&price=${encodeURIComponent(item.price)}`;
+                };
+                container.appendChild(itemCard);
+            });
+        }
+        
+        // Remove item from favourites
+        function removeFavourite(index) {
+            const favourites = JSON.parse(localStorage.getItem('favourites')) || [];
+            favourites.splice(index, 1);
+            localStorage.setItem('favourites', JSON.stringify(favourites));
+            loadFavourites();
+        }
+        
+        // Load favourites on page load
+        loadFavourites();
+    </script>
+</body>
+</html>

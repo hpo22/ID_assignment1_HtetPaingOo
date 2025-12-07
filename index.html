@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local - Food Delivery</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="location">
+            <svg class="location-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span class="address">207 Bishan street23</span>
+            <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </div>
+        <nav class="desktop-nav">
+            <a href="#" class="nav-link active">Home</a>
+            <a href="#services" class="nav-link">Services</a>
+            <a href="#popular" class="nav-link">Popular</a>
+            <a href="#promos" class="nav-link">Promos</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+        <div class="header-actions">
+            <button class="icon-btn heart-btn" onclick="window.location.href='favourite.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+            </button>
+            <button class="icon-btn cart-btn" onclick="window.location.href='cart.html'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                <span class="badge" id="cartBadge">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search laksa" onkeypress="handleSearch(event)">
+    </div>
+
+    <!-- Promo Banner -->
+    <section class="promo-section" id="promos">
+        <div class="promo-content">
+            <div class="promo-text">
+                <h1 class="promo-title">CYBER MONDAY</h1>
+                <p class="promo-subtitle">Get 20% off</p>
+            </div>
+            <button class="claim-btn" onclick="claimCoupon()">Claim</button>
+        </div>
+    </section>
+
+    <!-- Food Categories -->
+    <div class="categories">
+        <div class="category-item" onclick="window.location.href='category.html?type=fastfood'">
+            <div class="category-icon">🍔</div>
+            <span class="category-name">Fast Food</span>
+        </div>
+        <div class="category-item" onclick="window.location.href='category.html?type=western'">
+            <div class="category-icon">🥩</div>
+            <span class="category-name">Western</span>
+        </div>
+        <div class="category-item" onclick="window.location.href='category.html?type=Burmese'">
+            <div class="category-icon">🍣</div>
+            <span class="category-name">Burmese</span>
+        </div>
+        <div class="category-item" onclick="window.location.href='category.html?type=Thai'">
+            <div class="category-icon">🌭</div>
+            <span class="category-name">Thai</span>
+        </div>
+    </div>
+
+    <!-- Popular Section -->
+    <section class="section" id="popular">
+        <div class="section-header">
+            <h2 class="section-title">Popular on Local</h2>
+            <a href="popular.html" class="see-all">See all</a>
+        </div>
+        <div class="food-grid">
+            <div class="food-card" data-name="Singapore Laksa" data-price="$7" data-time="20min" data-rating="4.9" data-reviews="159" data-image="resource/laksa.png">
+                <div class="food-image">
+                    <img src="resource/laksa.png" alt="Singapore Laksa">
+                    <button class="favorite-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="food-info">
+                    <div class="food-header">
+                        <h3 class="food-name">Singapore Laksa</h3>
+                        <span class="food-price">$7</span>
+                    </div>
+                    <p class="food-time">20-30min</p>
+                </div>
+            </div>
+            <div class="food-card" data-name="Signature Beefsteak" data-price="$9.50" data-time="35min" data-rating="4.7" data-reviews="143" data-image="resource/beefsteak.png">
+                <div class="food-image">
+                    <img src="resource/beefsteak.png" alt="Signature Beefsteak">
+                    <button class="favorite-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="food-info">
+                    <div class="food-header">
+                        <h3 class="food-name">Signature Beefsteak</h3>
+                        <span class="food-price">$9.50</span>
+                    </div>
+                    <p class="food-time">30-40min</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Foods Near You Section -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Foods near you</h2>
+            <a href="popular.html" class="see-all">See all</a>
+        </div>
+        <div class="food-grid">
+            <div class="food-card" data-name="Pad Thai" data-price="$5.50" data-time="25min" data-rating="4.6" data-reviews="112" data-image="resource/padthai.png">
+                <div class="food-image">
+                    <img src="resource/padthai.png" alt="Pad Thai">
+                    <button class="favorite-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="food-info">
+                    <div class="food-header">
+                        <h3 class="food-name">Pad Thai</h3>
+                        <span class="food-price">$5.50</span>
+                    </div>
+                    <p class="food-time">20-35min</p>
+                </div>
+            </div>
+            <div class="food-card" data-name="Burmese Mont Ti Thote" data-price="$6" data-time="22min" data-rating="4.5" data-reviews="129" data-image="resource/nangyi thoke.png">
+                <div class="food-image">
+                    <img src="resource/nangyi thoke.png" alt="Nangyithoke">
+                    <button class="favorite-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="food-info">
+                    <div class="food-header">
+                        <h3 class="food-name">Nangyithoke</h3>
+                        <span class="food-price">$6</span>
+                    </div>
+                    <p class="food-time">30-45min</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - What Locals Say -->
+    <footer class="footer-section" id="services">
+        <h2 class="testimonials-title">What Locals Say</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="avatar">👩</div>
+                    <div class="user-info">
+                        <h3 class="user-name">Sarah Jenkins</h3>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="testimonial-text">"The delivery was incredibly fast. Local has become my go-to app for lunch!"</p>
+                <div class="service-tag">Fast Delivery</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="avatar">👨</div>
+                    <div class="user-info">
+                        <h3 class="user-name">Mike Ross</h3>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="testimonial-text">"Great variety of western and local food. The UI is so easy to use."</p>
+                <div class="service-tag">Variety of Different Culture Cuisine</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="avatar">👵</div>
+                    <div class="user-info">
+                        <h3 class="user-name">Mrs. Tan</h3>
+                        <div class="stars">⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="testimonial-text">"Love the laksa options. Very authentic taste delivered warm."</p>
+                <div class="service-tag">Cheaper Prices</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Contact Footer -->
+    <footer class="contact-footer" id="contact">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h2 class="footer-brand">Local</h2>
+                <p class="footer-description">Delivering happiness to your doorstep. The best local and international cuisines at the touch of a button.</p>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Contact Us</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <svg class="contact-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        <span>+65 6789 1234</span>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        <span>support@local.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <span>207 Bishan Street 23</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Newsletter</h3>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Your email">
+                    <button type="submit" class="newsletter-btn">Go</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="copyright">© 2025 Local Delivery Inc. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Load saved favorites on page load
+        function loadFavorites() {
+            const favourites = JSON.parse(localStorage.getItem('favourites')) || [];
+            document.querySelectorAll('.food-card').forEach(card => {
+                const itemName = card.getAttribute('data-name');
+                const isFavorite = favourites.some(fav => fav.name === itemName);
+                if (isFavorite) {
+                    const svg = card.querySelector('.favorite-btn svg');
+                    svg.setAttribute('fill', '#c13000');
+                }
+            });
+        }
+
+        
+        document.querySelectorAll('.food-card').forEach(card => {
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', function(e) {
+                // Don't navigate if clicking the favorite button
+                if (e.target.closest('.favorite-btn')) {
+                    return;
+                }
+                const name = this.getAttribute('data-name');
+                const price = this.getAttribute('data-price');
+                const time = this.getAttribute('data-time');
+                const rating = this.getAttribute('data-rating');
+                const reviews = this.getAttribute('data-reviews');
+                const image = this.getAttribute('data-image');
+                
+                // Navigate to product page with query parameters
+                window.location.href = `product.html?name=${encodeURIComponent(name)}&price=${encodeURIComponent(price)}&time=${encodeURIComponent(time)}&rating=${encodeURIComponent(rating)}&reviews=${encodeURIComponent(reviews)}&image=${encodeURIComponent(image)}`;
+            });
+        });
+
+        // Add favorite functionality
+        document.querySelectorAll('.favorite-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const svg = this.querySelector('svg');
+                const card = this.closest('.food-card');
+                const currentFill = svg.getAttribute('fill');
+                
+                // Get item data
+                const itemData = {
+                    name: card.getAttribute('data-name'),
+                    price: card.getAttribute('data-price'),
+                    time: card.getAttribute('data-time'),
+                    rating: card.getAttribute('data-rating'),
+                    reviews: card.getAttribute('data-reviews'),
+                    image: card.getAttribute('data-image')
+                };
+                
+                // Get current favourites from localStorage
+                let favourites = JSON.parse(localStorage.getItem('favourites')) || [];
+                
+                if (currentFill === 'none') {
+                    // Add to favourites
+                    svg.setAttribute('fill', '#c13000');
+                    if (!favourites.some(fav => fav.name === itemData.name)) {
+                        favourites.push(itemData);
+                    }
+                } else {
+                    // Remove from favourites
+                    svg.setAttribute('fill', 'none');
+                    favourites = favourites.filter(fav => fav.name !== itemData.name);
+                }
+                
+                // Save to localStorage
+                localStorage.setItem('favourites', JSON.stringify(favourites));
+            });
+        });
+
+        // Claim coupon functionality
+        function claimCoupon() {
+            localStorage.setItem('couponClaimed', 'true');
+            alert('CY2K coupon claimed successfully! 20% off will be applied at checkout.');
+        }
+
+        // Handle search
+        function handleSearch(event) {
+            if (event.key === 'Enter') {
+                const searchQuery = document.getElementById('searchInput').value.trim();
+                if (searchQuery) {
+                    window.location.href = `search.html?q=${encodeURIComponent(searchQuery)}`;
+                }
+            }
+        }
+
+        // Update cart badge
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const badge = document.getElementById('cartBadge');
+            if (badge) {
+                badge.textContent = totalItems;
+            }
+        }
+
+        // Load favorites on page load
+        loadFavorites();
+        updateCartBadge();
+    </script>
+</body>
+</html>

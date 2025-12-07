@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popular Items - Local</title>
+    <link rel="stylesheet" href="popular.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="back-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            <span>back</span>
+        </a>
+    </header>
+
+    <!-- Popular Items Container -->
+    <div class="popular-container" id="popularContainer">
+        
+    </div>
+
+    <script>
+        // All popular food items
+        const popularFoods = [
+            {
+                name: 'Marinated Chicken Satay',
+                rating: '4.7',
+                reviews: '159',
+                time: '20min',
+                price: '$9.50',
+                image: 'resource/satay.jpg'
+            },
+            {
+                name: 'Double Beef Burger',
+                rating: '4.9',
+                reviews: '99',
+                time: '25min',
+                price: '$11.50',
+                image: 'resource/burger.png'
+            },
+            {
+                name: 'Burmese Mont Ti Thote',
+                rating: '4.5',
+                reviews: '129',
+                time: '22min',
+                price: '$8.50',
+                image: 'resource/nangyi thoke.png'
+            },
+            {
+                name: 'Prawn Pad Thai',
+                rating: '4.6',
+                reviews: '119',
+                time: '10min',
+                price: '$7.50',
+                image: 'resource/padthai.png'
+            },
+            {
+                name: 'Singapore Laksa',
+                rating: '4.9',
+                reviews: '159',
+                time: '20min',
+                price: '$7',
+                image: 'resource/laksa.png'
+            }
+        ];
+
+        // Display popular items
+        function displayItems() {
+            const container = document.getElementById('popularContainer');
+            container.innerHTML = '';
+
+            popularFoods.forEach(food => {
+                const item = document.createElement('div');
+                item.className = 'popular-item';
+                item.onclick = function() {
+                    window.location.href = `product.html?name=${encodeURIComponent(food.name)}&price=${encodeURIComponent(food.price)}&time=${encodeURIComponent(food.time)}&rating=${encodeURIComponent(food.rating)}&reviews=${encodeURIComponent(food.reviews)}&image=${encodeURIComponent(food.image)}`;
+                };
+                
+                item.innerHTML = `
+                    <div class="item-image">
+                        <img src="${food.image}" alt="${food.name}">
+                    </div>
+                    <div class="item-details">
+                        <h3 class="item-name">${food.name}</h3>
+                        <div class="item-rating">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#FFD700" stroke="none">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                            <span class="rating-text">${food.rating} (${food.reviews})</span>
+                        </div>
+                        <div class="item-info">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span>Est:${food.time}</span>
+                            <span class="item-price">${food.price}</span>
+                        </div>
+                    </div>
+                    <button class="favorite-btn" onclick="toggleFavorite(event, ${JSON.stringify(food).replace(/"/g, '&quot;')})">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </button>
+                `;
+                
+                container.appendChild(item);
+            });
+
+            // Load favorite states
+            loadFavorites();
+        }
+
+        // Toggle favorite
+        function toggleFavorite(event, food) {
+            event.stopPropagation();
+            const btn = event.currentTarget;
+            const svg = btn.querySelector('svg');
+            const currentFill = svg.getAttribute('fill');
+            
+            let favourites = JSON.parse(localStorage.getItem('favourites')) || [];
+            
+            if (currentFill === 'none') {
+                svg.setAttribute('fill', '#c13000');
+                if (!favourites.some(fav => fav.name === food.name)) {
+                    favourites.push(food);
+                }
+            } else {
+                svg.setAttribute('fill', 'none');
+                favourites = favourites.filter(fav => fav.name !== food.name);
+            }
+            
+            localStorage.setItem('favourites', JSON.stringify(favourites));
+        }
+
+        // Load favorite states
+        function loadFavorites() {
+            const favourites = JSON.parse(localStorage.getItem('favourites')) || [];
+            document.querySelectorAll('.popular-item').forEach(item => {
+                const itemName = item.querySelector('.item-name').textContent;
+                const isFavorite = favourites.some(fav => fav.name === itemName);
+                if (isFavorite) {
+                    const svg = item.querySelector('.favorite-btn svg');
+                    svg.setAttribute('fill', '#c13000');
+                }
+            });
+        }
+
+        // Display items on page load
+        displayItems();
+    </script>
+</body>
+</html>
